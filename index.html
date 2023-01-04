@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Encriptador by Angel Martinez</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <span class="alura"><img src="./imgs/alura.png" alt="a"></span>
+    </header>
+    <main>
+        <div class="interactions">
+            <!-- <input type="text" placeholder="Ingrese el texto aqui"> -->
+            <textarea name="" id="textarea" placeholder="Ingrese el texto aqui" required></textarea>
+            <div class="buttons">
+                <span><i>&excl;</i> Solo letras minúsculas y sin acentos</span>
+                <button class="encrypt">Encriptar</button>
+                <button class="decrypt">Desencriptar</button>
+            </div>
+        </div>
+        <div class="rectangle_results">
+            <!-- Cuando no hay ningun mesaje encriptado -->
+            <div class="withoutMessage">
+                <img src="./imgs/Person.png" alt="person" id="person">
+                <h2>Ningún mensaje fue encontrado</h2>
+                <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+            </div>
+            <!-- Resultado del mensaje encriptado o desencriptado -->
+            <div class="message">
+            </div>
+            <button class="copy">copiar</button>
+        </div>
+    </main>
+    <!--  Javascript -->
+    <script>
+        let textarea = document.querySelector("textarea")
+        let encryptButton = document.querySelector(".encrypt")
+        let decryptButton = document.querySelector(".decrypt")
+        let noMessageDiv = document.querySelector('.withoutMessage')
+        let messageDiv = document.querySelector('.message')
+        let copy = document.querySelector(".copy")
+        // console.log(messageDiv);
+        let messageShowed
+        // Valores para encriptar y desencriptar
+        const a = "ai"
+        const e = "enter"
+        const i = "imes"
+        const o = "ober"
+        const u = "ufat"
+        
+        function controlText () {
+            let value = textarea.value
+            let encryptValue = ""
+            for (let i = 0; i < value.length; i++) {
+                const j = value[i];
+                if( (j ===   j.toUpperCase() &&  j !== " "  && j !=="?" && j !==   '.' &&  j !==   ',' && j!=='!' &&  j !==   ':' && j!==';') ||  j ===   'á' || j ===   'é' || j ===  'ó' ||j === 'í' || j ===  'ú' 
+                ){  
+                    console.log("error control text: ", i +" ----> "  + j  +" <---------");
+                    alert("No se admiten mayusculas, solo minusculas y sin asentos")
+                    return '404'
+                }
+            }
+        }
+
+        //  Funcion de  encriptar y desencriptar
+        async function encrypting(action ) {
+            const data = textarea.value
+            const result = await controlText()
+            textarea.value = ''
+            if(result === '404'){
+                return console.log("404"); 
+            }      
+            if(data === ""){
+                noMessageDiv.style.display = "block"
+                messageDiv.style.display= "none"
+                return copy.style.display = "none"
+            }
+            // logica encriptar
+            if(action === 'encriptar' && data){
+                let encryptMessage = ''
+                for (let j = 0; j < data.length; j++) {
+                const el= data[j];
+                    if(el === "a"){
+                        encryptMessage += a
+                    }else if(el === "e"){   
+                        encryptMessage += e
+                    }else if(el === "i"){
+                        encryptMessage += i
+                    }else if(el === "o"){
+                        encryptMessage += o
+                    }else if(el === "u"){
+                        encryptMessage += u
+                    }else{
+                        encryptMessage += el
+                    }
+                }
+                noMessageDiv.style.display = "none"
+                messageDiv.style.display= "block"
+                copy.style.display = "block"
+                messageShowed = encryptMessage
+                return messageDiv.innerHTML = encryptMessage    
+            }
+            // ---- logica desencriptar
+            if(action === 'desencriptar'){
+                let decryptMessage = ''
+                let fragmentMsg = ''
+                for (let j = 0; j < data.length ; j++) {
+                    const el= data[j];
+                    // console.log("-------------------------")
+                    // console.log(el)
+                    if(j === 0 && el != "a" && el != "e" && el != "i" && el != "o" && el != "u"){
+                        decryptMessage += el
+                    }
+                    else if(fragmentMsg +el === a ){
+                        decryptMessage += "a"
+                        fragmentMsg = ""
+                    }else if(fragmentMsg +el === e){
+                        decryptMessage += "e"
+                        fragmentMsg = ""
+                    }else if(fragmentMsg +el === o){
+                        decryptMessage += "o"
+                        fragmentMsg = ""
+                    }else if(fragmentMsg +el  === i){
+                        decryptMessage += "i"
+                        fragmentMsg = ""
+                    }else if(fragmentMsg +el  === u){
+                        decryptMessage += "u"
+                        fragmentMsg = ""
+                    }else if( !fragmentMsg.length && el != "a" && el != "e" && el != "i" && el != "o" && el != "u"){
+                        decryptMessage += el
+                    }
+                    else if(el === " "){
+                        decryptMessage += el
+                    }
+                    else{
+                        fragmentMsg += el
+                    }
+                }
+                noMessageDiv.style.display = "none"
+                messageDiv.style.display= "block"
+                copy.style.display = "block"
+                return messageDiv.innerHTML = decryptMessage    
+            }
+        }
+        
+        function coping(){
+            let seleccion = document.createRange(); // For mobile devices
+            seleccion.selectNodeContents(messageDiv);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(seleccion);
+            var res = document.execCommand('copy');
+            window.getSelection().removeRange(seleccion);
+            
+            // navigator.clipboard.readText() //leer el texto copiado
+            // .then( res => alert(res))
+        }
+
+        encryptButton.onclick = () =>encrypting("encriptar")
+        decryptButton.onclick = () =>encrypting("desencriptar")
+        copy.onclick = () =>coping()
+
+    </script>
+</body>
+</html>

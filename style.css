@@ -1,0 +1,275 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+:root{
+    --background:  rgb(235, 239, 255);
+    --white: rgba(255, 255, 255, 1);
+    --dark-blue-300: rgba(10, 56, 113, 1);
+    ;
+}
+*
+{
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* *::-webkit-scrollbar{
+    display: none;
+} */
+*::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+*::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-button:increment,*::-webkit-scrollbar-button {
+    display: none;
+} 
+
+*::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #a3a3a3;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+
+body
+{
+    /* width: 100vw; */
+    background-color: var(--background) ;
+    overflow-x: hidden;
+}
+.alura {
+    position: absolute;
+    top: 5%;
+    left: 20px;
+}
+main
+{
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.interactions
+{
+    height: 100%;
+    width: 100% ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+}
+.interactions textarea
+{
+    position: relative;
+    color: var(--dark-blue-300);
+    height: 55vh;
+    width: 100%;
+    max-width: 95%;
+    font-weight: 400;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 50px 10px 0 10px;
+    margin-bottom: 10px;
+
+} 
+
+.interactions textarea::placeholder{
+    color: var(--dark-blue-300);
+    font-size: 24px;
+    transition: 500ms all;
+}
+.interactions textarea:focus::placeholder, .interactions textarea:hover::placeholder
+{
+    opacity: 0.2;
+}
+
+.buttons
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.buttons span{
+    position: absolute;
+    top: -10px;
+    left: 5%;
+    color: rgb(73, 80, 87);
+    font-size: 12px;
+}
+.buttons span i
+{
+    padding: 0px 5px;
+    background: #333;
+    color: white;
+    border-radius: 50%;
+}
+.buttons button{
+    height: 64px;
+    width: 280px;
+    max-width: 343px;
+    margin: 10px ;
+    padding: 24px;
+    border: transparent;
+    border-radius: 24px;    
+    font-size: 16px;
+    line-height: 19px;
+    transition: 500ms transform;
+}
+
+.buttons .encrypt
+{
+    background: var(--dark-blue-300);
+    color: var(--white);
+}
+.buttons .decrypt
+{
+    border: var(--dark-blue-300) solid 1px;
+    color: var(--dark-blue-300);
+}
+.rectangle_results
+{
+    position: relative;
+    width: 92%;
+    margin-bottom: 30px;
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 32px;
+    box-shadow: 0px 5px 8px 1px rgba(0, 0, 0, 0.085);
+}
+#person{
+    display: none;
+}
+.withoutMessage img 
+{
+    width: 300px;
+    max-width: 400px;
+}
+.withoutMessage h2
+{
+    font-size: 24px;
+    text-align: center;
+    margin: 10px 0;
+}
+.withoutMessage p 
+{
+    font-size: 16px;
+    text-align: center;
+    color: #495057;
+}
+.message
+{
+    display: none;
+    margin: 15px;
+    height: 100%;
+    width: 100%;
+    color: #495057;
+    font-size: 16px;
+    line-height: 150%;
+}
+.rectangle_results .copy 
+{
+    display: none;
+    position: relative;
+    height: 64px;
+    width: 280px;
+    max-width: 343px;
+    margin: 10px ;
+    padding: 24px;
+    border: transparent;
+    border-radius: 24px;    
+    font-size: 16px;
+    line-height: 19px;
+    transition: 500ms transform;
+    color: var(--dark-blue-300);
+    border: var(--dark-blue-300) solid 1px;
+    transition: 0.4s all;
+}
+
+/* Estilo para Tablet */
+@media only screen and (min-width: 760px){
+
+    .interactions textarea{
+        top: 80px;  
+        padding: 10px 50px;
+        font-size: 32px;
+        line-height: 150%;
+    }
+    .buttons button{
+        width: 340px;
+    }
+    /* .rectangle_results{
+        max-width: 750px;
+    } */
+}
+
+
+@media only screen and (min-width: 1200px){
+    body
+    {
+        height: 100vh;
+        width: 100vw;
+        background-color: var(--background) ;
+        padding: 40px
+    }
+    main{
+        height: 100%;
+        flex-direction: row;
+        margin: 0;
+    }
+    .rectangle_results
+    {
+        height: 105%;
+        top: 16px ;
+        right: -10px;
+        max-width: 400px;
+        background-color: var(--white);
+        padding: 10px 25px;
+    }
+    #person{
+        display: block;
+    }
+    .buttons{
+        bottom: 0;
+    }
+    .buttons button:hover
+    {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+    .copy:hover
+    {
+        cursor: pointer;
+        transform: scale(1.1);
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    .message{
+        height: 90%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-right: 30px;
+        font-size: 24px;
+        line-height: 150%;
+    }    
+}
