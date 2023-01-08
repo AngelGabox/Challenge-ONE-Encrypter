@@ -139,6 +139,7 @@ let textarea = document.querySelector("textarea")
                 root.style.setProperty("--background", "rgb(14, 8, 37)")
             }else if(containerTheme.classList.contains("dark-mode")){
                 containerTheme.classList.replace("dark-mode", "light-mode")
+                alura.src= "./imgs/alura.png"
                 root.style.setProperty("--background", "rgb(235, 239, 255)")
                 document.querySelector("#person").src = "./imgs/person.svg"
             }
