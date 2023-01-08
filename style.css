@@ -1,9 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 :root{
     --background:  rgb(235, 239, 255);
+    --blue-black :  rgb(14, 18, 37);
+    --brackground-white:rgba(255, 255, 255, 1);
+    --color-textarea: rgba(10, 56, 113, 1);
+    --dark-blue: rgba(10, 56, 113, 1);
+    --efect-light: drop-shadow( 0 0 10px rgba(255, 255, 255, 0.6));
+    --grey: rgb(73, 80, 87);
+    /* --interactions-background: rgba(255, 255, 255); */
+    --light-grey: rgb(202, 202, 202);
+    --light-blue: rgb(110, 221, 184);
+    --results-background: rgba(255, 255, 255, 1);
     --white: rgba(255, 255, 255, 1);
-    --dark-blue-300: rgba(10, 56, 113, 1);
-    ;
+    --shadow-day: drop-shadow( -14px 8px 6px rgba(0,0,0));
+    --svg: #333;
 }
 *
 {
@@ -20,25 +30,23 @@
 }
 
 *::-webkit-scrollbar:vertical {
-    width: 10px;
+    width: 8px;
 }
 
 *::-webkit-scrollbar-button:increment,*::-webkit-scrollbar-button {
     display: none;
 } 
-
-*::-webkit-scrollbar:horizontal {
-    height: 10px;
-}
-
 *::-webkit-scrollbar-thumb {
     background-color: #a3a3a3;
     border-radius: 20px;
-    border: 2px solid #f1f2f3;
+    /* border: 1px solid var(--light--grey); */
 }
 
 *::-webkit-scrollbar-track {
     border-radius: 10px;  
+}
+*::-webkit-scrollbar-corner{
+    appearance: none;
 }
 
 body
@@ -47,15 +55,84 @@ body
     background-color: var(--background) ;
     overflow-x: hidden;
 }
+
 .alura {
     position: absolute;
-    top: 5%;
+    top: 40px;
     left: 20px;
+    filter: var(--shadow-day);
+    /* -webkit-filter: drop-shadow( -5px -2px 10px rgb(0, 0, 0) ); */
+}
+    .dark-mode ~ .alura {
+    filter: var(--efect-light);
+    /* -webkit-filter: drop-shadow( 0 0 10px #ffffff97 ); */
+}
+.theme{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 20px;
+    left: calc(50% - 30px);
+    height: 22px;
+    width: 50px;
+    border: 2px solid var(--light-blue);
+    border-radius: 20px;
+    transform: scale(1.5);
+    transition: 0.5s all;
+}
+.light-mode{
+    /* background-color: rgb(255, 255, 255); */
+    filter: var(--shadow-day);
+}
+.dark-mode{
+    background-color: rgb(0, 0, 0);
+    filter: drop-shadow(0 0 12px var(--light-blue));    
+}
+.theme:hover, .indicator:hover{
+    cursor: pointer;
+}
+
+.indicator{
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    /* margin: 0 1px; */
+    transition: 500ms all ease-in-out;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.light-mode .indicator{
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background-color: rgb(255, 255,80);
+    background-image: url("./imgs/icons8-summer-50.png");   
+}
+.dark-mode .indicator{
+    border: 1px solid #000;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    background-image: url("./imgs/moon.svg");
+    transform: translateX(28px);
+}
+.icon_theme{
+    height: 18px;
+    margin: 0 2px;
+}
+.sun{
+    position: absolute;
+    left: 0;
+}
+.moon{
+    position: absolute;
+    right: 0;
 }
 main
 {
-    margin-top: 70px;
     width: 100%;
+    position: relative;
+    top: 70px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -74,7 +151,7 @@ main
 .interactions textarea
 {
     position: relative;
-    color: var(--dark-blue-300);
+    color: var(--dark-blue);
     height: 55vh;
     width: 100%;
     max-width: 95%;
@@ -87,9 +164,11 @@ main
     margin-bottom: 10px;
 
 } 
-
+.dark-mode + span + main .interactions textarea{
+    color: var(--light-grey);
+}
 .interactions textarea::placeholder{
-    color: var(--dark-blue-300);
+    color:unset;
     font-size: 24px;
     transition: 500ms all;
 }
@@ -111,13 +190,23 @@ main
     position: absolute;
     top: -10px;
     left: 5%;
-    color: rgb(73, 80, 87);
+    color: var(--grey);
     font-size: 12px;
+}
+.dark-mode  + span + main .interactions .buttons span {
+    color: var(--light-grey);
+    /* filter: var(--efect-light); */
+
+}
+.dark-mode + span + main .interactions .buttons span i{
+    background: var(--light-grey);
+    font-weight: 900;
+    color: #000;
 }
 .buttons span i
 {
     padding: 0px 5px;
-    background: #333;
+    background: var(--grey);
     color: white;
     border-radius: 50%;
 }
@@ -127,22 +216,46 @@ main
     max-width: 343px;
     margin: 10px ;
     padding: 24px;
-    border: transparent;
     border-radius: 24px;    
     font-size: 16px;
+    border: var(--dark-blue) solid 1px;
     line-height: 19px;
     transition: 500ms transform;
+}
+.dark-mode + span + main .interactions .buttons button{
+    transition: 1s all;
 }
 
 .buttons .encrypt
 {
-    background: var(--dark-blue-300);
-    color: var(--white);
+    background: var(--dark-blue);
+    color: var(--white); 
 }
+.dark-mode + span + main .interactions .buttons .encrypt{
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: var(--light-blue);
+    color: var(--light-blue);
+}
+.dark-mode + span + main .interactions .buttons button:hover, .dark-mode + span + main .rectangle_results .copy:hover{
+    transition: 0.5s all;
+    transform: none;
+    filter: var(--efect-light);
+}
+.dark-mode + span + main .interactions .buttons  .encrypt:hover, .dark-mode + span + main .rectangle_results .copy:hover{
+    background-color: rgba(0, 0, 0  );
+}
+.dark-mode + span + main .interactions .buttons  .decrypt:hover{
+    background-color: transparent;
+}
+
 .buttons .decrypt
 {
-    border: var(--dark-blue-300) solid 1px;
-    color: var(--dark-blue-300);
+    color: var(--dark-blue);
+}
+.dark-mode + span + main .interactions .buttons .decrypt{
+    background-color: rgba(255, 255, 255, 0.109);   
+    border-color: var(--light-blue);
+    color: var(--light-blue);
 }
 .rectangle_results
 {
@@ -154,9 +267,14 @@ main
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--white);
+    background-color: var(--results-background);
+    /* background: #000000; */
     border-radius: 32px;
     box-shadow: 0px 5px 8px 1px rgba(0, 0, 0, 0.085);
+}
+.dark-mode + span + main .rectangle_results{
+    background-color: rgba(21, 0, 43, 0);
+    box-shadow: 0 12px 50px -20px var(--light-blue);
 }
 #person{
     display: none;
@@ -177,6 +295,18 @@ main
     font-size: 16px;
     text-align: center;
     color: #495057;
+}
+.dark-mode + span + main .rectangle_results .withoutMessage h2
+{
+    color: var(--light-grey);
+}
+.dark-mode + span + main .rectangle_results .withoutMessage p{
+    color: #aaa;
+
+}
+.dark-mode + span + main .rectangle_results .message{
+    color: var(--light-grey);
+
 }
 .message
 {
@@ -202,16 +332,23 @@ main
     font-size: 16px;
     line-height: 19px;
     transition: 500ms transform;
-    color: var(--dark-blue-300);
-    border: var(--dark-blue-300) solid 1px;
+    color: var(--dark-blue);
+    border: var(--dark-blue) solid 1px;
     transition: 0.4s all;
+}
+.dark-mode + span + main .rectangle_results .copy{
+    background-color: rgba(0, 0, 0, 0.67);   
+    border-color: var(--light-blue);
+    color: var(--light-blue);
 }
 
 /* Estilo para Tablet */
 @media only screen and (min-width: 760px){
-
+    /* main{
+        top: 0px;
+    } */
     .interactions textarea{
-        top: 80px;  
+        top: 40px;  
         padding: 10px 50px;
         font-size: 32px;
         line-height: 150%;
@@ -234,17 +371,18 @@ main
         padding: 40px
     }
     main{
+        top: 0;
         height: 100%;
         flex-direction: row;
         margin: 0;
     }
     .rectangle_results
     {
-        height: 105%;
-        top: 16px ;
+        height: 100%;
+        top: 0 ;
         right: -10px;
         max-width: 400px;
-        background-color: var(--white);
+        /* background-color: var(--white); */
         padding: 10px 25px;
     }
     #person{
@@ -265,7 +403,7 @@ main
         background-color: rgba(0, 0, 0, 0.2);
     }
     .message{
-        height: 90%;
+        height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
         padding-right: 30px;
