@@ -18,8 +18,11 @@ let textarea = document.querySelector("textarea")
             // let encryptValue = ""
             for (let i = 0; i < value.length; i++) {
                 const j = value[i];
-                if( (j ===   j.toUpperCase() &&  j !== " "  && j !=="?" && j !==   '.' &&  j !==   ',' && j!=='!' &&  j !==   ':' && j!==';') ||  j ===   'á' || j ===   'é' || j ===  'ó' ||j === 'í' || j ===  'ú' 
-                ){  
+                // console.log(j ===   j.toUpperCase() );
+                // console.log(["á", "é", "ó", "í", "ú"].includes(j));
+                // console.log([" ", "?", ".", ",", "!", ":", ";"].includes(j));
+                // console.log(j);
+                if( (j ===   j.toUpperCase() && ![" ", "?", ".", ",", "!", ":", ";"].includes(j)) ||  ["á", "é", "ó", "í", "ú"].includes(j)){  
                     console.log("error control text: ", i +" ----> "  + j  +" <---------");
                     alert("No se admiten mayusculas, solo minusculas y sin asentos")
                     return '404'
@@ -73,7 +76,7 @@ let textarea = document.querySelector("textarea")
                     const el= data[j];
                     // console.log("-------------------------")
                     // console.log(el)
-                    if(j === 0 && el != "a" && el != "e" && el != "i" && el != "o" && el != "u"){
+                    if(j === 0 && !["a", "e", "i", "o",  "u"].includes(el)){
                         decryptMessage += el
                     }
                     else if(fragmentMsg +el === a ){
@@ -91,7 +94,7 @@ let textarea = document.querySelector("textarea")
                     }else if(fragmentMsg +el  === u){
                         decryptMessage += "u"
                         fragmentMsg = ""
-                    }else if( !fragmentMsg.length && el != "a" && el != "e" && el != "i" && el != "o" && el != "u"){
+                    }else if( !fragmentMsg.length && !["a", "e",  "i", "o",  "u"].includes(el)){
                         decryptMessage += el
                     }
                     else if(el === " "){
