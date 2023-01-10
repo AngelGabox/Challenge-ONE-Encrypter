@@ -22,7 +22,7 @@ let textarea = document.querySelector("textarea")
                 // console.log(["á", "é", "ó", "í", "ú"].includes(j));
                 // console.log([" ", "?", ".", ",", "!", ":", ";"].includes(j));
                 // console.log(j);
-                if( (j ===   j.toUpperCase() && ![" ", "?", ".", ",", "!", ":", ";"].includes(j)) ||  ["á", "é", "ó", "í", "ú"].includes(j)){  
+                if( (j ===   j.toUpperCase() && ![" ", "?", ".", ",", "!", ":", ";", ")", "("].includes(j)) ||  ["á", "é", "ó", "í", "ú"].includes(j)){  
                     console.log("error control text: ", i +" ----> "  + j  +" <---------");
                     alert("No se admiten mayusculas, solo minusculas y sin asentos")
                     return '404'
