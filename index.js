@@ -118,14 +118,16 @@ let textarea = document.querySelector("textarea")
             window.getSelection().addRange(seleccion);
             document.execCommand('copy');
             window.getSelection().removeRange(seleccion);
-            alert("Texto copiado");
             // navigator.clipboard.readText() //leer el texto copiado
             // .then( res => alert(res))
         }
 
         encryptButton.onclick = () =>encrypting("encriptar")
         decryptButton.onclick = () =>encrypting("desencriptar")
-        copy.onclick = () =>coping()
+        copy.onclick = () =>{ 
+                coping()
+                alert("Texto copiado");
+        }
 
         //------------codigo dark/light Mode
         let containerTheme = document.querySelector(".theme") 
