@@ -118,6 +118,7 @@ let textarea = document.querySelector("textarea")
             window.getSelection().addRange(seleccion);
             document.execCommand('copy');
             window.getSelection().removeRange(seleccion);
+            alert("Texto copiado");
             // navigator.clipboard.readText() //leer el texto copiado
             // .then( res => alert(res))
         }
